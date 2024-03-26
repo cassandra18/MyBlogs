@@ -1,0 +1,18 @@
+node_modules/
+.env
+
+{
+ "title":"Nails",
+ "imageUrl": "https://i.pinimg.com/564x/e0/6b/ca/e06bca36ed7acc694b2e33782d7dc287.jpg",
+ "content": "testing",
+ "authorName": "Cassandra",
+ "category": "Test blogs",
+ "tags":"Test blogs",
+ "authorId": "65b48715ecea598a700d6b0f"
+ }
+
+
+{
+"email": "mamaclassy@gmail.com",
+"password": "password1"
+ }
