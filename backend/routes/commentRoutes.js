@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken }  = require('../middleware/authUserMiddleware')
+const { authenticateUserToken }  = require('../middleware/authUserMiddleware')
 const createComment = require('../controllers/commentsController');
 
 
-router.route('/:postId/comment').post(authenticateToken, createComment);
+router.route('/:postId/comment').post(authenticateUserToken, createComment);
 
 
 module.exports = router;

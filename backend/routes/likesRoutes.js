@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken }  = require('../middleware/authUserMiddleware');
+const { authenticateUserToken }  = require('../middleware/authUserMiddleware');
 const addLike = require('../controllers/likesController');
 
-router.route('/:postId/like').post(authenticateToken, addLike);
+router.route('/:postId/like').post(authenticateUserToken, addLike);
 
 module.exports = router;

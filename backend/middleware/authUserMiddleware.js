@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userSchema');
 
-const authenticateToken = asyncHandler(async(req, res, next) => {
+const authenticateUserToken = asyncHandler(async(req, res, next) => {
     let token;
 
     if (
@@ -36,4 +36,4 @@ const authenticateToken = asyncHandler(async(req, res, next) => {
 });
 
 
-module.exports = { authenticateToken };
+module.exports = { authenticateUserToken };

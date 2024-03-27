@@ -1,4 +1,4 @@
-import React, { useState, SetStateAction, Dispatch, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useHistory hook
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,45 +32,14 @@ const LoginForm: React.FC = () => {
       }
 
       const { token } = await response.json();
+      localStorage.setItem("token", token);
 
-
-      // Fetch user's blogs after successful login
-      const blogsResponse = await fetch('http://localhost:3000/api/post/post-by-author', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-
-      if (!blogsResponse.ok) throw new Error('Failed to fetch blogs');
-
-      const blogs = await blogsResponse.json();
       navigate('/dashboard');
     } catch (error) {
       console.error("Error logging in:", error);
     }
   };
 
-  const fetchAuthorData = async (authorId: string) => {
-    try {
-        const authorResponse = await fetch(
-            `http://localhost:3000/api/user/getme`
-        );
-
-        const blogResponse = await fetch(
-            `http://localhost:3000/api/user/${authorId}/blogs`
-        );
-
-        if (!authorResponse.ok || !blogResponse.ok) {
-            // Handle error fetching author data or blogs
-            return;
-        }
-
-        const authorData = await authorResponse.json();
-        const blogData = await blogResponse.json();
-
-        navigate("/profile");
-    } catch (error) {
-        console.error("Error fetching author data: ", error);
-    }
-  };
 
   return (
     <div className="py-20 w-full">

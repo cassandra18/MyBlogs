@@ -58,7 +58,7 @@ const userController =  {
         if(user && (await bcrypt.compare(password, user.password))) {
             res.json({
 
-                _id: user.id,
+                id: user.id,
                 username: user.username,
                 email: user.email,
                 token: generateToken(user._id)

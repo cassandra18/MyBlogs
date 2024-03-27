@@ -3,6 +3,7 @@ import Blogs from "./Blogs";
 import Pagination from "./pagination";
 import Categories from "./categories";
 import Sidebar from "./sidebar";
+
 interface Post {
   title: string;
   content: string;
@@ -22,21 +23,19 @@ const BlogPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[] | null>([]); // posts is an array of objects
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  //useEffect is used to connect a component to an external system. For this case, it connects us to a browser API
+  // useEffect is used to connect a component to an external system.
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `http://localhost:3000/api/post/get-posts?page=${currentPage}&limit=${pageSize}`;
+        let url = `http://localhost:3000/api/post/get-all-posts?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }
 
         const response = await fetch(url);
-
         const data = await response.json();
-        console.log(data);
-        setPosts(data); // the state of the blog post changes froman empty array to the fetched data
+        setPosts(data); // Set the fetched data as posts
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -45,12 +44,7 @@ const BlogPage: React.FC = () => {
     fetchPosts();
   }, [currentPage, pageSize, selectedCategory]);
 
-  //page changing button
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  //category changing btn
+  // Function to handle category change
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -59,43 +53,35 @@ const BlogPage: React.FC = () => {
 
   return (
     <div>
-
-      {/* category section */}
+      {/* Category section */}
       <div className="max-w-7xl mx-auto">
-        <div>
-          <Categories
-            onSelectCategory={handleCategoryChange}
-            selectedCategory={selectedCategory}
-            activeCategory={activeCategory}
-          />
-        </div>
+        <Categories
+          onSelectCategory={handleCategoryChange}
+          selectedCategory={selectedCategory}
+          activeCategory={activeCategory}
+        />
 
         {/* All blogs container */}
         <div className="flex flex-col md:flex-row gap-12">
-          {/*Blogs section */}
-
+          {/* Blogs section */}
           <Blogs
-            posts={posts}
+            blogs={posts}
             currentPage={currentPage}
-            selectedCategory={selectedCategory}
+            selectedCategory={selectedCategory} // Pass selectedCategory to Blogs
             pageSize={pageSize}
           />
 
-          {/*sidebar component */}
-          <div>
-            <Sidebar />
-          </div>
+          {/* Sidebar component */}
+          <Sidebar />
         </div>
 
-        {/*pagination */}
-        <div>
-          <Pagination
-            onPageChange={handlePageChange}
-            currentPage={currentPage}
-            posts={posts}
-            pageSize={pageSize}
-          />
-        </div>
+        {/* Pagination */}
+        <Pagination
+          onPageChange={setCurrentPage}
+          currentPage={currentPage}
+          posts={posts}
+          pageSize={pageSize}
+        />
       </div>
     </div>
   );

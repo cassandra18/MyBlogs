@@ -21,15 +21,26 @@ app.use((req, res, next) => {
     next();
 });
 
-
+//post routes
 app.use('/api/post', require('./routes/postRoutes'),
     require('./routes/commentRoutes'),
     require('./routes/likesRoutes'),
     require('./routes/ratingsRoutes'));
+
+//admin routes
 app.use('/api/admin', require('./routes/adminRoutes'));
+
+//user routes
 app.use('/api/user', require('./routes/userRoutes'));
+
+//search routes
 app.use('/api', require('./routes/searchRoutes'));
 
+// subscription email route
+app.use('/api', require('./routes/emailRoutes'));
+
+//contact form route
+app.use('/api', require('./routes/contactRoutes'));
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server running on port: ${port}`.blue));

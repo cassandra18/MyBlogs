@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 interface Post {
   title: string;
   content: string;
-  _id: string;
+  _id: number;
   authorName: string;
   createdAt: Date;
   imageUrl: string;
@@ -15,15 +15,17 @@ interface Post {
 }
 
 interface BlogsProps {
-  posts: Post[] | null;
+  blogs: Post[] | null;
   currentPage: number;
   selectedCategory: string | null;
   pageSize: number;
 }
 
-const Blogs: React.FC<BlogsProps> = ({posts, currentPage, selectedCategory, pageSize}) => {
-  const filteredPosts = (posts || [])
-  .filter((posts) => !selectedCategory || posts.category === selectedCategory)
+const Blogs: React.FC<BlogsProps> = ({blogs, currentPage, selectedCategory, pageSize}) => {
+  console.log("Posts:", blogs); // Add this line to check the value of posts
+
+  const filteredPosts = (blogs ?? [])
+  .filter((post) => !selectedCategory || post.category === selectedCategory)
   .slice((currentPage -1) *pageSize, currentPage = pageSize);
 
   console.log(filteredPosts);
@@ -60,7 +62,7 @@ const Blogs: React.FC<BlogsProps> = ({posts, currentPage, selectedCategory, page
               </Link>
             ))
           ) : (
-            <h1>No Posts Yet</h1>
+            <h1 className="text-orange-700">No blogs Yet</h1>
           )}
         </div>
     </>

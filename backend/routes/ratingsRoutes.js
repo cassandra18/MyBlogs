@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken }  = require('../middleware/authUserMiddleware');
+const { authenticateUserToken }  = require('../middleware/authUserMiddleware');
 const addRating = require('../controllers/ratingsController');
 
-router.route('/:postId/rate').post(authenticateToken, addRating);
+router.route('/:postId/rate').post(authenticateUserToken, addRating);
 
 module.exports = router;

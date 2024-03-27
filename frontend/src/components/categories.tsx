@@ -8,7 +8,7 @@ interface CategoriesProps {
 const Categories: React.FC<CategoriesProps> = ({onSelectCategory, activeCategory}) => {
 
 
-  const categories = ["Test blogs", "Mental Health", "Fashion"]
+  const categories = ["Nails", "Mental Health", "Fashion", "Tech"]
 
 
 return (

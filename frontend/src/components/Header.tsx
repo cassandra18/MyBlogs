@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaFacebook, FaDribbble, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { FaXmark } from "react-icons/fa6";
 
@@ -23,11 +23,11 @@ const Header: React.FC = () => {
     { path: "/contact", link: "Contact" },
   ];
   return (
-    <header className=" bg-black text-white fixed top-0 left-0 right-0">
-      <nav className="px-4 py-4 max-w-7xl mx-auto flex justify-between items-center">
+    <header className=" bg-black text-white font-bold fixed top-0 left-0 right-0" style={{ opacity: 0.5, height: "50px" }}>
+      <nav className="px-2 py-2 max-w-7xl mx-auto flex justify-between items-center">
         <h1>
           <Link to="/" className="text-xl font-bold">
-            Blog<span className="text-orange-500">Web</span>
+            Cassy's <span className="text-orange-500">Web</span>
           </Link>
         </h1>
 
@@ -44,19 +44,19 @@ const Header: React.FC = () => {
 
         {/* menu icons*/}
         <div className="text-white md:flex items-center gap-4 hidden">
-          <Link to="/facebook" className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out">
-            <FaFacebook />
+          <Link to="https://www.linkedin.com/in/cassandra-lelei-88987a269" className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out">
+            <FaLinkedin />
           </Link>
-          <Link to="/dribble"className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out" >
-            <FaDribbble />
+          <Link to="https://github.com/cassandra18"className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out" >
+            <FaGithub />
           </Link>
-          <Link to="/twitter" className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out">
+          <Link to="https://x.com/LelCassandra?t=3buzTiV9hqiVe1T4fJNdZw&s=09" className="hover:text-orange-500 duration-200 hover:scale-110 transition ease-in-out">
             <FaTwitter />
           </Link>
           <Link to="/signin">
             <button
-              className="bg-orange-500 px-4 py-2
-           text-white
+              className="bg-white px-2
+           text-black
             font-medium round
            hover:bg-orange-500
            hover:text-black

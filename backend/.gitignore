@@ -2,17 +2,24 @@ node_modules/
 .env
 
 {
+  
  "title":"Nails",
  "imageUrl": "https://i.pinimg.com/564x/e0/6b/ca/e06bca36ed7acc694b2e33782d7dc287.jpg",
  "content": "testing",
  "authorName": "Cassandra",
- "category": "Test blogs",
- "tags":"Test blogs",
- "authorId": "65b48715ecea598a700d6b0f"
- }
+ "category": "Nails",
+ "tags":"nails, fashion, beauty",
+ "authorId": "6604146f5a5313365782f4e2"
+ 
+}
 
 
 {
 "email": "mamaclassy@gmail.com",
 "password": "password1"
  }
+
+ "email":"nana@gmail.com",
+  "password": "password1",
+  "image": "https://i.pinimg.com/564x/63/08/2c/63082ccefaa79d5caf444a9775f3b62e.jpg"
+  

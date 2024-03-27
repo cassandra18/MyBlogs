@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
+import ContactForm from "../components/contactMe";
+
 
 const Contact: React.FC = () => {
   return (
@@ -11,6 +13,8 @@ const Contact: React.FC = () => {
         <p className="text-gray-100 md:w-3/5 mx-auto  md:mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ratione eaque consequuntur, asperiores at tempora sit atque delectus.</p>
       </div>
     </div>
+
+    <ContactForm />
     </>
   );
 };

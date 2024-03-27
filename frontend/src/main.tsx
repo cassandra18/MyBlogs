@@ -11,6 +11,7 @@ import HomePage from "./pages/homePage";
 import BlogPage from './pages/blogs.tsx'
 import SingleBlog from './components/SingleBlog.tsx'
 import SingleAuthor from './components/SingleAuthor.tsx'
+import DashboardPage from './pages/dashboardPage.tsx'
 
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact/>
+      },
+      {
+        path: '/dashboard',
+        element: <DashboardPage/>
       },
       {
         path: '/about',

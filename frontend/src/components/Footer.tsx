@@ -1,21 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Footer: React.FC = () => {
+  const [email, setEmail] = useState(""); // staore the email input
+
+  const handleSubscription = async () => {
+    try {
+      //Send a post request to the backend API endpoint
+      const response = await fetch("http://localhost:3000/api/subcribe", {
+        method: "POST",
+        "headers": {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      //If the request is successful, display a success message to the user
+      if (response.ok) {
+        toast.success("Subscription successful!",{
+          position: "top-center", // Adjust position as needed
+          autoClose: 5000, // Close after 5 seconds
+        });
+      
+      } else {
+        toast.error("Error subscribing. Please try again later.", {
+          position: "top-center", // Adjust position as needed
+          autoClose: 5000, // Close after 5 seconds
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error subscribing. Please try again later.", {
+        position: "top-center", // Adjust position as needed
+        autoClose: 5000, // Close after 5 seconds
+      });
+    }
+    
+  }
   return (
     <div className="bg-gray-900  bottom-0 left-0 right-0">
       <div className="px-4 pt-16 mx-auto  sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
         <div className="grid lg:grid-cols-6 mb-0">
           <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4">
             <div>
-              <p className="font-medium tracking-wide text-white">Category</p>
+              <p className="font-medium tracking-wide text-white">I am</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
                     to="/"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    News
+                    Happy
                   </Link>
                 </li>
 
@@ -176,7 +212,11 @@ const Footer: React.FC = () => {
 
           <div className="md:max-w-md lg:col-span-2 lg:mt-0 mt-5">
             <p className="font-medium tracking-wide text-whiteh-full">Subscription</p>
-            <form className="mt-4 flex flex-col md:flex-row">
+            <form className="mt-4 flex flex-col md:flex-row"
+            onSubmit={ (e) => {
+              e.preventDefault();
+              handleSubscription();
+            }}>
               <div className="flex py-2 space-x-2">
                 <label className="text-gray-500 " >Email:
                 <input
@@ -185,10 +225,12 @@ const Footer: React.FC = () => {
                   id="email"
                   autoComplete="email"
                   className="w-full h-8 px-4 rounded  focus:outline-none border "
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} 
                 />
                 </label>
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex px-6 items-center rounded border text-gray-500 
                                 justify-center font-medium tracking-wide transition duration-200 shadow-md hover:bg-orange-200 focus:outline-none "
                 >
