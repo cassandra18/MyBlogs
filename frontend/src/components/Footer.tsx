@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
     
   }
   return (
-    <div className="bg-black  bottom-0 left-0 right-0"  style={{ opacity: 0.5}}>
+    <div className="bottom-0 left-0 right-0"  style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
       <div className="px-4 pt-16 mx-auto  sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
         <div className="grid lg:grid-cols-6 mb-0">
           <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4">
