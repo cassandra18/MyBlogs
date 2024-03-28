@@ -24,6 +24,8 @@ const Footer: React.FC = () => {
           position: "top-center", // Adjust position as needed
           autoClose: 5000, // Close after 5 seconds
         });
+
+        setEmail("");
       
       } else {
         toast.error("Error subscribing. Please try again later.", {

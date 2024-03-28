@@ -50,6 +50,10 @@ const ContactForm: React.FC = () => {
         position: "top-right", // Adjust position as needed
         autoClose: 5000, // Close after 5 seconds
       });
+
+      setName("");
+      setEmail("");
+      setMessage("");
     
     } catch (error) {
       //Handle errors that might occur during non-successful response
