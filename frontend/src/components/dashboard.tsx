@@ -92,7 +92,7 @@ const Dashboard: React.FC = () => {
           {/*Blogs section */}
 
           <Blogs
-            posts={posts}
+            blogs={posts}
             currentPage={currentPage}
             selectedCategory={selectedCategory}
             pageSize={pageSize}
@@ -119,53 +119,3 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
-// import React, { useState, useEffect } from 'react';
-
-// const Dashboard = () => {
-//   const [blogs, setBlogs] = useState([]);
-//   const [token, setToken] = useState(""); // State to hold the JWT token
-
-//   useEffect(() => {
-//     // Function to fetch user's blogs
-//     const fetchBlogs = async () => {
-//       try {
-//         // Fetch the user's blogs using the stored token
-//         const response = await fetch('http://localhost:3000/api/post/post-by-author', {
-//           headers: { 'Authorization': `Bearer ${token}` },
-//         });
-
-//         if (!response.ok) throw new Error('Failed to fetch blogs');
-
-//         const blogsData = await response.json();
-//         setBlogs(blogsData);
-//       } catch (error) {
-//         console.error('Error fetching blogs:', error);
-//       }
-//     };
-
-//     fetchBlogs(); // Call fetchBlogs function after the token is obtained
-//   }, [token]); // Include token in the dependency array to re-fetch blogs when token changes
-
-//   // Function to retrieve token from local storage or state
-//   const retrieveToken = () => {
-//     const storedToken = localStorage.getItem('token'); // Assuming token is stored in local storage
-//     if (storedToken) {
-//       setToken(storedToken);
-//     }
-//   };
-
-//   useEffect(() => {
-//     retrieveToken(); // Call retrieveToken function on component mount
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2 className='py-32'>Your Blogs</h2>
-//       <ul>
-        
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;

@@ -130,7 +130,9 @@ const postController = {
 
   getPostByAuthor: asyncHandler(async (req, res) => {
     try {
-      const posts = await Post.find({ author: req.user.id });
+      console.log(req.user.id);
+      const posts = await Post.find({ authorId: req.user.id });
+      console.log(posts)
       res.json(posts);
     } catch (error) {
       console.error('Error fetching user blogs:', error);

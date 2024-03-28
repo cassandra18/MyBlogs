@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useHistory hook
-import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm: React.FC = () => {
@@ -92,7 +91,6 @@ const LoginForm: React.FC = () => {
           </Link>
         </h6>
       </form>
-      <ToastContainer />
     </div>
   );
 };

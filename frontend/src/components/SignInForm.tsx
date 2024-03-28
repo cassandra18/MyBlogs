@@ -1,4 +1,4 @@
-import React, { useState, SetStateAction, Dispatch } from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -40,9 +40,11 @@ const SignUpForm: React.FC = () => {
       }
       //If the response is susccessful the form is submitted sucessfully
       const data = await response.json();
-      console.log("Form submitted successfully:", data);
+      if (isSubmitted){
+        console.log("Form submitted successfully:", data);
 
-      setIsSubmitted(true);
+        setIsSubmitted(true);
+      }
       toast.success("Form submitted successfully!", {
         position: "top-right", // Adjust position as needed
         autoClose: 5000, // Close after 5 seconds

@@ -1,6 +1,5 @@
-import React, { useState, SetStateAction, Dispatch } from "react";
+import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ContactForm: React.FC = () => {
@@ -40,9 +39,13 @@ const ContactForm: React.FC = () => {
       }
       //If the response is susccessful the form is submitted sucessfully
       const data = await response.json();
-      console.log("Form submitted successfully:", data);
 
-      setIsSubmitted(true);
+      if (isSubmitted){
+        console.log("Form submitted successfully:", data);
+
+        setIsSubmitted(true);
+      }
+      
       toast.success("Form submitted successfully!", {
         position: "top-right", // Adjust position as needed
         autoClose: 5000, // Close after 5 seconds

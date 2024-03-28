@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { GoArrowRight } from "react-icons/go";
 import ContactForm from "../components/contactMe";
 
 

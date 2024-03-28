@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams  } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "./sidebar";
@@ -50,12 +50,9 @@ const SingleBlog = () => {
   const {
     title,
     content,
-    category,
     imageUrl,
     createdAt,
     authorName,
-    comments,
-    ratings,
   } = postData;
 
 

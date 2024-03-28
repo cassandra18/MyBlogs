@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Comments = require('./commentsSchema');
 const Likes = require('./likesSchema');
-
+const User = require('./userSchema')
     
 const postSchema = new Schema({
     title: {
@@ -23,8 +23,8 @@ const postSchema = new Schema({
         required: true
     },
     authorId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Admin'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     authorName: {
         type: String,

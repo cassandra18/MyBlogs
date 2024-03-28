@@ -1,8 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
-import { MdArticle } from "react-icons/md";
-
 const AboutUs: React.FC = () => {
   return (
     <div className="md:max-w-7xl mx-auto ">
