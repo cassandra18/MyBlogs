@@ -64,10 +64,11 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className="py-20 w-full  " >
-      <h1 className="py-10 px-10 text-center ">Create Account</h1>
+    <div className="py-20 w-full  "  style={{ backgroundImage: "linear-gradient(to bottom right, rgba(188, 220, 209, 0.7), rgba(137, 167, 167, 0.7), rgba(205, 229, 220, 0.7))" }}>
+      <h1 className="py-10 px-10 text-white text-center ">Create Account</h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <form className="bg-white shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4">
+      <form className="bg-white shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4"
+       style={{ backgroundImage: "linear-gradient(to bottom right, rgba(188, 220, 209, 0.7), rgba(137, 167, 167, 0.7), rgba(205, 229, 220, 0.7))" }}>
         <div>
           <label className="block text-black text-l mb-2" htmlFor="username">
             Username
@@ -80,6 +81,7 @@ const SignUpForm: React.FC = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />
@@ -95,6 +97,7 @@ const SignUpForm: React.FC = () => {
             value={email}
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />
@@ -109,6 +112,7 @@ const SignUpForm: React.FC = () => {
             placeholder="*****"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />

@@ -12,7 +12,7 @@ const Categories: React.FC<CategoriesProps> = ({onSelectCategory, activeCategory
 
 
 return (
-  <div className='md:space-x-16 border-b-2 px-4 flex flex-wrap items-center mb-8 py-5 text-gray-900 font-semibold'>
+  <div className='md:space-x-16 border-b-2 px-4 flex flex-wrap items-center my-12 pt-16 pb-5 text-gray-900 font-semibold'>
     
     <button onClick={ () => onSelectCategory("") }
     className={`lg:ml-12 ${activeCategory ? "" : "activebtn"}`}>All</button>

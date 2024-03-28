@@ -8,7 +8,7 @@ const AboutUs: React.FC = () => {
     <div className="md:max-w-7xl mx-auto ">
       <div className=" flex ml-1 items-center flex-col md:flex-row gap-12 my-12">
         <img
-          src="/public/images/pic7.jpeg"
+          src="/images/pic7.jpeg"
           alt="image"
           className="rounded-md h-96 mb-4 mr-1"
         />

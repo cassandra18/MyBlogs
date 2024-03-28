@@ -64,10 +64,10 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="py-20 w-full  " >
-      <h1 className="py-10 px-10 text-center ">Contact me. Lets engage!</h1>
+    <div className="py-20 w-full  " style={{ backgroundImage: "linear-gradient(to bottom right, rgba(188, 220, 209, 0.7), rgba(137, 167, 167, 0.7), rgba(205, 229, 220, 0.7))" }}>
+      <h1 className="py-10 px-10 text-white text-center ">Contact me. Lets engage!</h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <form className="bg-white shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4">
+      <form className="shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4">
         <div>
           <label className="block text-black text-l mb-2" htmlFor="name">
             Name
@@ -80,6 +80,7 @@ const ContactForm: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />
@@ -95,6 +96,7 @@ const ContactForm: React.FC = () => {
             value={email}
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />
@@ -102,13 +104,15 @@ const ContactForm: React.FC = () => {
           <label className="block text-black text-l mb-2" htmlFor="message">
             message
           </label>
-          <input
+          <textarea
             className="shadow appearance-none rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline border"
             id="message"
-            type="message"
             placeholder="Enter text here"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            rows={5}
+            cols={50}
+            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
           />
         </div>
         <br />

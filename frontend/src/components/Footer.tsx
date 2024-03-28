@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState(""); // staore the email input
@@ -39,7 +41,7 @@ const Footer: React.FC = () => {
     
   }
   return (
-    <div className="bg-gray-900  bottom-0 left-0 right-0">
+    <div className="bg-black  bottom-0 left-0 right-0">
       <div className="px-4 pt-16 mx-auto  sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
         <div className="grid lg:grid-cols-6 mb-0">
           <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4">
@@ -48,7 +50,7 @@ const Footer: React.FC = () => {
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
-                    to="/"
+                    to="/about"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
                     Happy
@@ -57,28 +59,28 @@ const Footer: React.FC = () => {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/about"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    World
+                    Loved
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="/about"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    Games
+                    Content
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="/about"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    References
+                    Able
                   </Link>
                 </li>
               </ul>
@@ -89,7 +91,7 @@ const Footer: React.FC = () => {
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
                     News
@@ -98,28 +100,28 @@ const Footer: React.FC = () => {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    World
+                    Aesthetics
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    Games
+                    Inspo
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    References
+                    DIY
                   </Link>
                 </li>
               </ul>
@@ -132,10 +134,10 @@ const Footer: React.FC = () => {
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    News
+                    Journals
                   </Link>
                 </li>
 
@@ -144,7 +146,7 @@ const Footer: React.FC = () => {
                     to="/"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    World
+                    Mood
                   </Link>
                 </li>
 
@@ -162,7 +164,7 @@ const Footer: React.FC = () => {
                     to="/"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    References
+                    Happiness
                   </Link>
                 </li>
               </ul>
@@ -173,37 +175,28 @@ const Footer: React.FC = () => {
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
-                    to="/"
+                    to="https://www.linkedin.com/in/cassandra-lelei-88987a269"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    News
+                    <FaLinkedin />
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="https://github.com/cassandra18"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    World
+                     <FaGithub />
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    to="/"
+                    to="https://x.com/LelCassandra?t=3buzTiV9hqiVe1T4fJNdZw&s=09"
                     className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
                   >
-                    Games
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    References
+                    <FaTwitter />
                   </Link>
                 </li>
               </ul>
