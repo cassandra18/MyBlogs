@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
           </label>
           <input
             className="shadow appearance-none rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline border"
-            id="email"
+            id="email-input"
             type="email"
             placeholder="abc@email.com"
             value={email}
