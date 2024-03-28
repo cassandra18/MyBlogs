@@ -41,12 +41,12 @@ const Footer: React.FC = () => {
     
   }
   return (
-    <div className="bottom-0 left-0 right-0"  style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <div className="bg-black bottom-0 left-0 right-0" style={{  backgroundColor: 'rgba(0, 0, 0, 0.1)',opacity: 0.9 }}>
       <div className="px-4 pt-16 mx-auto  sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
         <div className="grid lg:grid-cols-6 mb-0">
-          <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4 ">
             <div>
-              <p className="font-medium tracking-wide text-white">I am</p>
+              <p className="font-medium tracking-wide ">I am</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div>
-              <p className="font-medium tracking-wide text-white">Fashion</p>
+              <p className="font-medium tracking-wide ">Fashion</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div>
-              <p className="font-medium tracking-wide text-white">
+              <p className="font-medium tracking-wide ">
                 Mental Health
               </p>
               <ul className="mt-2 space-y-2">
@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div>
-              <p className="font-medium tracking-wide text-white">Contact</p>
+              <p className="font-medium tracking-wide ">Contact</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
@@ -224,7 +224,7 @@ const Footer: React.FC = () => {
                 </label>
                 <button
                   type="submit"
-                  className="inline-flex px-6 items-center rounded border text-gray-500 
+                  className="inline-flex px-4 items-center rounded border text-gray-500 bg-gray-700
                                 justify-center font-medium tracking-wide transition duration-200 shadow-md hover:bg-orange-200 focus:outline-none "
                 >
                   Subscribe
