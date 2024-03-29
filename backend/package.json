@@ -4,7 +4,9 @@
   "description": "A blogging website",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "debug": "node --inspect index.js"
   },
   "repository": {
     "type": "git",
