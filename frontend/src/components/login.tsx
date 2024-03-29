@@ -11,7 +11,7 @@ const LoginForm: React.FC = () => {
   const handleLogin = async () => {
     try {
       const response: Response = await fetch(
-        "http://localhost:3000/api/user/login",
+        "https://cassys-web.onrender.com/api/user/login",
         {
           method: "POST",
           headers: {

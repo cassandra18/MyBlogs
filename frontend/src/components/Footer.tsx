@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   const handleSubscription = async () => {
     try {
       //Send a post request to the backend API endpoint
-      const response = await fetch("http://localhost:3000/api/subcribe", {
+      const response = await fetch("https://cassys-web.onrender.com/api/subcribe", {
         method: "POST",
         "headers": {
           "Content-Type": "application/json",

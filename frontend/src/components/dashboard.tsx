@@ -27,7 +27,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `http://localhost:3000/api/post/post-by-author?page=${currentPage}&limit=${pageSize}`;
+        let url = `https://cassys-web.onrender.com/api/post/post-by-author?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;

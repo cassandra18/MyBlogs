@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
   const [popularPosts, setPopularPosts] = useState<Post[] | null>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/post/get-all-posts")
+    fetch("https://cassys-web.onrender.com/api/post/get-all-posts")
       .then((res) => res.json())
       .then((data) => setPopularPosts(data.slice(0, 15)));
   }, []);

@@ -17,7 +17,7 @@ const SignUpForm: React.FC = () => {
     try {
       //use the url to fech input data from the client
       const response = await fetch(
-        "http://localhost:3000/api/user/create-user",
+        "https://cassys-web.onrender.com/api/user/create-user",
         {
           method: "POST",
           headers: {

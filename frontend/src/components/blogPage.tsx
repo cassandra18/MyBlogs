@@ -27,7 +27,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `http://localhost:3000/api/post/get-all-posts?page=${currentPage}&limit=${pageSize}`;
+        let url = `https://cassys-web.onrender.com/api/post/get-all-posts?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
