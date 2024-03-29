@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
+import './output.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import SignInPage from "./pages/signUp.tsx";
 import LoginPage from "./pages/login.tsx";
