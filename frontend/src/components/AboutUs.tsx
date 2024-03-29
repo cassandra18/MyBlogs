@@ -29,7 +29,7 @@ const AboutUs: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="text-orange-900 hover:underline mt-4"
-          >Get to know more about me by licking this link</a>
+          >Get to know more about me by clicking this link</a>
         </div>
       </div>
 
