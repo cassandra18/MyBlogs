@@ -43,4 +43,11 @@ app.use('/api', require('./routes/emailRoutes'));
 app.use('/api', require('./routes/contactRoutes'));
 app.use(errorHandler);
 
+// Backend start link
+app.get('/', (req, res) => {
+
+    res.send('Welcome to My Blog App Backend side');
+
+});
+
 app.listen(port, () => console.log(`Server running on port: ${port}`.blue));
