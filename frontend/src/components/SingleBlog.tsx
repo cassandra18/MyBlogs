@@ -3,17 +3,6 @@ import { useParams  } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "./sidebar";
 
-// interface PostData {
-//   title: string;
-//   content: string;
-//   _id: string;
-//   authorName: string;
-//   createdAt: Date;
-//   imageUrl: string;
-//   comments: string;
-//   ratings: number;
-//   category: string;
-// }
 
 const SingleBlog = () => {
   const { postId } = useParams();

@@ -33,9 +33,6 @@ const AboutUs: React.FC = () => {
         </div>
       </div>
 
-      {/* <h1 className="font-sans border-b-2  mt-10">Top Authors</h1>
-
-      */}
       
     </div>
   );
