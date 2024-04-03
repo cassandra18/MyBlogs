@@ -23,8 +23,15 @@ const Sidebar: React.FC = () => {
       .then((data) => setPopularPosts(data.slice(0, 15)));
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   return (
-    <div>
+    <div className="mx-3">
 
         {/*Latest blogs*/}
 
@@ -34,7 +41,7 @@ const Sidebar: React.FC = () => {
           ? popularPosts.slice(0,5).map((post) => (
               <div key={post._id} className="mb-3">
                 <h4 className="font-medium mb-2">{post.title}</h4>
-                <Link to={`/post/${post._id}`} className="font-medium hover:text-orange-500 text-orange-900 inline-flex items-center py-1 ">
+                <Link to={`/post/${post._id}`} onClick={scrollToTop} className="font-medium hover:text-orange-500 text-orange-900 inline-flex items-center py-1 ">
                     Read More <GoArrowRight className="mt-1 ml-1 text-orange-900 " />
                 </Link>
                 <div className="border-b-2 w-3/4 "></div>
@@ -51,7 +58,7 @@ const Sidebar: React.FC = () => {
           ? popularPosts.slice(6, 10).map((post) => (
               <div key={post._id} className="mb-3">
                 <h4 className="font-medium mb-2">{post.title}</h4>
-                <Link to={`/post/${post._id}`} className="font-medium text-orange-900 hover:text-orange-500 inline-flex items-center py-1 ">
+                <Link to={`/post/${post._id}`} onClick={scrollToTop} className="font-medium text-orange-900 hover:text-orange-500 inline-flex items-center py-1 ">
                     Read More <GoArrowRight className="mt-1 ml-1 text-orange-900 " />
                 </Link>
                 <div className="border-b-2 w-3/4 "></div>

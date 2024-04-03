@@ -35,11 +35,11 @@ const Blogs: React.FC<BlogsProps> = ({blogs, currentPage, selectedCategory, page
     <>
       {/* Blog Card section*/}
       
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mx-3">
           { filteredPosts ? ( filteredPosts.map((post) => (
-              <Link to={`/post/${post._id}`} key={post._id} className="p-5 shadow-lg hover:scale-110 transition ease-in-out rounded duration-200 cursor-pointer">
+              <Link to={`/post/${post._id}`} key={post._id} className="p-5 shadow-lg hover:scale-90 transition ease-in-out rounded duration-200 cursor-pointer">
                 <div>
-                  <img src={post.imageUrl} alt="image" className="w-full  h-48 object-cover object-center" />
+                  <img src={post.imageUrl} alt="image" className="w-full  h-48 object-cover object-center rounded-lg" />
                 </div>
 
                 <div className="mt-4 mb-2 font-bold hover:text-orange-900 cursor-pointer">
@@ -62,7 +62,7 @@ const Blogs: React.FC<BlogsProps> = ({blogs, currentPage, selectedCategory, page
               </Link>
             ))
           ) : (
-            <h1 className="text-orange-700">No blogs Yet</h1>
+            <h1 className="text-orange-700 ">No blogs Yet</h1>
           )}
         </div>
     </>

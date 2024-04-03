@@ -1,14 +1,14 @@
 import React from "react";
 const AboutUs: React.FC = () => {
   return (
-    <div className="md:max-w-7xl mx-auto ">
-      <div className=" flex ml-1 items-center flex-col md:flex-row gap-12 my-12">
+    <div className=" max-w-7xl mx-auto mt-28" >
+      <div className=" flex ml-1 items-center flex-col  gap-12 my-12" >
         <img
           src="/images/pic7.jpeg"
           alt="image"
           className="rounded-md h-96 mb-4 mr-1"
         />
-        <div>
+        <div >
           <h2 className="font-bold text-orange-500 mb-4">
             Software Engineer, Mother, and Dreamer
           </h2>

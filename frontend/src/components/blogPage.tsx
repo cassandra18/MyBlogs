@@ -62,7 +62,7 @@ const BlogPage: React.FC = () => {
         />
 
         {/* All blogs container */}
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col md:flex-row lg:gap-12 md:gap-6 gap-6">
           {/* Blogs section */}
           <Blogs
             blogs={posts}
