@@ -1,5 +1,6 @@
 import React from "react";
-const AboutUs: React.FC = () => {
+const AboutUs: React.FC = () => { 
+  // this is a comment 
   return (
     <div className=" max-w-7xl mx-auto mt-28" >
       <div className=" flex ml-1 items-center flex-col  gap-12 my-12" >
