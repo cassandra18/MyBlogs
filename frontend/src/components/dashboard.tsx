@@ -75,10 +75,10 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
 
       {/* category section */}
-      <div className="mx-auto">
+      <div className="max-w-3/4">
         <div>
           <Categories
             onSelectCategory={handleCategoryChange}
@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* All blogs container */}
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col md:flex-row gap-2">
           {/*Blogs section */}
 
           <Blogs
@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const Blogs: React.FC<BlogsProps> = ({blogs, currentPage, selectedCategory, page
     <>
       {/* Blog Card section*/}
       
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mx-3">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 ">
           { filteredPosts ? ( filteredPosts.map((post) => (
               <Link to={`/post/${post._id}`} key={post._id} className="p-5 shadow-lg hover:scale-90 transition ease-in-out rounded duration-200 cursor-pointer">
                 <div>
