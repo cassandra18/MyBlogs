@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
     <div>
 
       {/* category section */}
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         <div>
           <Categories
             onSelectCategory={handleCategoryChange}
