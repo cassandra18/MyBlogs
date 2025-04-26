@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require('../controllers/authController');  // Protect middleware to ensure user is authenticated
+const postController = require('../controllers/postController');  // Import the post controller
 
-const postController = require('../controllers/postController');
-const { authenticateToken } = require('../middleware/authAdminMiddleware');
-const { authenticateUserToken } = require('../middleware/authUserMiddleware');
+// Route for creating a new post
+router.post('/', protect, postController.createPost);  // Protect the route to ensure only authenticated users can create posts
 
+// Route for fetching all posts
+router.get('/', postController.getPosts);  // Public access to all posts
 
-//Route for creating post
-router.route('/create-post').post(authenticateToken, postController.createPost);
+// Route for fetching a specific post by its ID
+router.get('/:postId', postController.getPost);  // Public access to a single post
 
-//Route for handling image uploads
-router.route('/upload-image').post(authenticateToken, postController.uploadMultipleImages);
+// Route for fetching all posts by a specific author (authenticated user)
+router.get('/author', protect, postController.getPostByAuthor);  // Protect the route to ensure user is authenticated
 
-//Route for getting all the posts
-router.route('/get-all-posts').get(postController.getPosts);
+// Route for updating a post
+router.put('/:postId', protect, postController.updatePost);  // Protect the route to ensure user is authenticated
 
-//Route for getting posts by a specific author
-router.route('/post-by-author').get(authenticateUserToken, postController.getPostByAuthor)
+// Route for deleting a post
+router.delete('/:postId', protect, postController.deletePost);  // Protect the route to ensure only the author/admin can delete
 
-//GEt post by id
-router.route('/:postId').get(postController.getPost).put(authenticateToken, postController.updatePost);
-
-//delete post
-router.route('/:postId').delete(authenticateToken, postController.deletePost);
+// Route for uploading multiple images (for post creation or editing)
+router.post('/upload', protect, postController.uploadMultipleImages);
 
 module.exports = router;

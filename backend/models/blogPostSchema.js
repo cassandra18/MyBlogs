@@ -1,70 +1,58 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Comments = require('./commentsSchema');
-const Likes = require('./likesSchema');
-const User = require('./userSchema')
-    
 const postSchema = new Schema({
-    title: {
-        type: String,
-        required: true
+  title: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    // optional image
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',  // connect to Category Schema
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  authorId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  authorName: {
+    type: String,
+    required: true,
+  },
+  tags: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Tag'
+  }],
+  likes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }],
+  ratings: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
-    imageUrl: {
-        type: String,
-      //required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        required: true
-    },
-    authorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    authorName: {
-        type: String,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    tags: {
-        type: [String], //Array of tags for categorization
-        required: true
-    },
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    value: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
     }
-    ],
-    ratings: [
-        {
-            user: Schema.Types.ObjectId,
-            ref: 'User',
-            type: Number,
-            value: {
-                default: 0,
-                min: 0,
-                max: 5
-            }
-           
-        }
-    ],
-    comments: [{
-        author: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        text: String,
-    }]
-});
-
+  }],
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comments',
+  }],
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
 

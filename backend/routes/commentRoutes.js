@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateUserToken }  = require('../middleware/authUserMiddleware')
-const createComment = require('../controllers/commentsController');
+const { createComment } = require('../controllers/commentController');  // Import the createComment controller
+const { protect } = require('../controllers/authController');  // Protect middleware to ensure the user is authenticated
 
-
-router.route('/:postId/comment').post(authenticateUserToken, createComment);
-
+// Route for creating a new comment on a post
+router.post('/:postId/comments', protect, createComment);  // The postId comes from the URL parameters
 
 module.exports = router;

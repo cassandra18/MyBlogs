@@ -1,12 +1,18 @@
 const express = require('express');
-const { userController, generateToken } = require('../controllers/userController');
-const { authenticateUserToken } = require('../middleware/authUserMiddleware');
 const router = express.Router();
+const { protect } = require('../controllers/authController');  // Protect middleware to ensure user is authenticated
+const { userController } = require('../controllers/userController');  // Import user controller
 
+// Route to create a new user (public route)
+router.post('/register', userController.createUser);  // Register new user
 
-router.route('/create-user').post(userController.createUser);
-router.route('/login').post(userController.loginUser);
-router.route('/:userId').delete(userController.deleteUser);
-router.route('/getme').get(authenticateUserToken, userController.getMe);
+// Route to log in a user (public route)
+router.post('/login', userController.loginUser);  // Login user
 
-module.exports = router; 
+// Route to get the current user's information (protected route)
+router.get('/me', protect, userController.getMe);  // Get current user details, protected
+
+// Route to delete a user by their ID (protected route)
+router.delete('/:userId', protect, userController.deleteUser);  // Only an authenticated user or admin can delete a user
+
+module.exports = router;
