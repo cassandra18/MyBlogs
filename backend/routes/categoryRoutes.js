@@ -9,18 +9,18 @@ const {
 } = require('../controllers/categoryController');
 
 // Create a new category
-router.post('/categories', createCategory);
+router.post('/', createCategory);
 
 // Get all categories
-router.get('/categories', getCategories);
+router.get('/', getCategories);
 
 // Get a category by its ID
-router.get('/categories/:categoryId', getCategoryById);
+router.get('/:categoryId', getCategoryById);
 
 // Update a category by its ID
-router.put('/categories/:categoryId', updateCategory);
+router.put('/:categoryId', updateCategory);
 
 // Delete a category by its ID
-router.delete('/categories/:categoryId', deleteCategory);
+router.delete('/:categoryId', deleteCategory);
 
 module.exports = router;

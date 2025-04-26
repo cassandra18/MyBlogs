@@ -35,6 +35,7 @@ h1 {
     @apply select-none;
     @apply bg-transparent;
     @apply font-mono;
+    background-color: rgb(215, 215, 215);
   }
 }
 

@@ -6,8 +6,8 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  imageUrl: {
-    type: String,
+  imagePaths: {
+    type: [{ type: String }],
     // optional image
   },
   category: {

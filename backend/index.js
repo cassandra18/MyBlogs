@@ -26,6 +26,8 @@ app.use('/api/post', require('./routes/postRoutes'));
 app.use('/api/comment', require('./routes/commentRoutes'));
 app.use('/api/likes', require('./routes/commentLikesRouter.js'));
 app.use('/api/ratings', require('./routes/ratingsRoutes'));
+app.use('/api/categories', require('./routes/categoryRoutes'));
+app.use('/api/', require('./routes/tagRoutes'));
 
 
 // User-related routes
@@ -36,6 +38,8 @@ app.use('/api/email', require('./routes/emailRoutes'));
 
 // Contact form route
 app.use('/api/contact', require('./routes/contactRoutes'));
+
+app.use('/uploads', express.static('uploads'));
 
 // Error handler middleware
 app.use(errorHandler);

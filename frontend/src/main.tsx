@@ -12,7 +12,9 @@ import BlogPage from './pages/blogs.tsx'
 import SingleBlog from './components/SingleBlog.tsx'
 import SingleAuthor from './components/SingleAuthor.tsx'
 import DashboardPage from './pages/dashboardPage.tsx'
-
+import AdminDashboard from "./components/admin/adminDashboard";
+import ManagePostsPage from './pages/admin/managePosts.tsx'
+import Dashboard from './pages/admin/adminDashboard.tsx'
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,20 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: "/admin",
+    element: <Dashboard/>,
+    children: [
+      {
+        path: '/admin',
+        element: <AdminDashboard/>,
+      },
+      {
+        path: '/admin/add-post',
+        element: <ManagePostsPage/>,
+      }
+    ]
+  }
 ]);
 
 
