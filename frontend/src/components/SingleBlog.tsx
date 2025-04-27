@@ -65,6 +65,7 @@ const SingleBlog = () => {
             <img
               src={`${baseUrl}/${imagePaths[0]}`} // Full URL for the image
               alt={title}
+              loading="lazy"
               className="w-full mt-10 mx-auto max-h-96 rounded object-cover object-center"
             ></img>
             

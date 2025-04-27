@@ -7,6 +7,7 @@ const AboutUs: React.FC = () => {
         <img
           src="/images/pic7.jpeg"
           alt="image"
+          loading="lazy"
           className="rounded-md h-96 mb-4 mr-1"
         />
         <div className="px-2">

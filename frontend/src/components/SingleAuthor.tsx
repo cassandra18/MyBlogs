@@ -31,7 +31,7 @@ const SingleAuthor: React.FC = () => {
             { admin ? (
                 <div>
                 <div className='md:inline-flex md:gap-12 my-10 mx-auto'>
-                    <img src={admin.image} alt=""
+                    <img src={admin.image} alt="" loading='lazy'
                     className='rounded-md w-1/2 h-auto mb-4 ml-2'/>
                     <div>
                     <h2 className='font-bold text-xl text-orange-500 mb-4'> Meet {admin.username}</h2>

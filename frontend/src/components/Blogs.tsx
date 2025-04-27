@@ -36,6 +36,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs, currentPage, selectedCategory, pag
                   <img
                     src={`${baseUrl}/${post.imagePaths[0]}`} // Full URL for the image
                     alt={post.title}
+                    loading="lazy"
                     className="w-full h-48 object-cover object-center rounded-lg"
                   />
                 ) : (
