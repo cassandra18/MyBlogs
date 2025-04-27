@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@types/react-toastify": "^4.1.0",
+    "axios": "^1.9.0",
     "framer-motion": "^12.9.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
