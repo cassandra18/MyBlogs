@@ -51,7 +51,7 @@ const postController = {
   
   // Get all posts
   getPosts: asyncHandler(async (req, res) => {
-    const posts = await Post.find().sort({ createdAt: -1 });
+    const posts = await Post.find().sort({ createdAt: -1 }).populate('category', 'name').populate('tags', 'name').populate('authorId', 'username');
 
     if (posts) {
       res.status(200).json(posts);
@@ -71,7 +71,7 @@ const postController = {
   getPost: asyncHandler(async (req, res) => {
     const postId = req.params.postId;
 
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate('category', 'name').populate('tags', 'name').populate('authorId', 'username');
 
     if (post) {
       res.status(200).json(post);

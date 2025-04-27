@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import ReactSelect from "react-select";
+import { MultiValue, ActionMeta } from "react-select";
 
+interface Category {
+  _id: string;
+  name: string;
+}
+
+interface Tag {
+  _id: string;
+  name: string;
+}
 interface Post {
   _id: string;
   title: string;
   content: string;
-  category: string;
-  tags: string[];
+  category: Category;
+  tags: Tag[];
   imagePaths?: string[];
 }
 
@@ -52,34 +63,70 @@ const ManagePosts: React.FC = () => {
   };
 
   const fetchCategories = async () => {
-    const res = await axios.get("http://localhost:3000/api/categories");
-    setCategories(res.data.categories || []);
+    try {
+      const res = await axios.get("http://localhost:3000/api/categories");
+
+      if (Array.isArray(res.data)) {
+        setCategories(res.data);
+      } else {
+        setCategories([]); // fallback to empty if it's not an array
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setCategories([]); // fallback to empty on error
+    }
   };
 
   const fetchTags = async () => {
-    const res = await axios.get("http://localhost:3000/api/tags");
-    setTags(res.data.tags || []);
+    try {
+      const res = await axios.get("http://localhost:3000/api/tags");
+
+      if (Array.isArray(res.data)) {
+        setTags(res.data);
+      } else {
+        setTags([]);
+      }
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+      setTags([]);
+    }
   };
 
   // Handle input changes in the form
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   // Handle file changes (images)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      setForm(prev => ({ ...prev, images: Array.from(files) }));
+      setForm((prev) => ({ ...prev, images: Array.from(files) }));
     }
   };
 
   // Handle multiple tag selection
-  const handleTagChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
-    setForm(prev => ({ ...prev, tags: selectedOptions }));
+  const handleTagChange = (
+    newValue: MultiValue<{ value: string; label: string }>,
+    actionMeta: ActionMeta<{ value: string; label: string }>
+  ) => {
+    console.log("Action type:", actionMeta.action);
+  
+    if (actionMeta.action === "clear") {
+      console.log("User cleared all selected tags!");
+    }
+  
+    setForm((prev) => ({
+      ...prev,
+      tags: newValue.map((option) => option.value),
+    }));
   };
+  
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,7 +149,10 @@ const ManagePosts: React.FC = () => {
       }
 
       if (editingPostId) {
-        await axios.put(`http://localhost:3000/api/post/${editingPostId}`, form);
+        await axios.put(
+          `http://localhost:3000/api/post/${editingPostId}`,
+          form
+        );
         setEditingPostId(null);
       } else {
         await axios.post("http://localhost:3000/api/post/", formData, {
@@ -117,7 +167,9 @@ const ManagePosts: React.FC = () => {
       setShowForm(false);
 
       toast.success(
-        editingPostId ? "Post updated successfully!" : "Post created successfully!",
+        editingPostId
+          ? "Post updated successfully!"
+          : "Post created successfully!",
         {
           position: "top-right",
           autoClose: 3000,
@@ -147,8 +199,8 @@ const ManagePosts: React.FC = () => {
     setForm({
       title: post.title,
       content: post.content,
-      category: post.category,  // Set category name directly
-      tags: post.tags,  // Set tags names directly
+      category: post.category.name, // Set category name directly
+      tags: post.tags.map((tag) => tag.name), // Set tags names directly
       images: [],
     });
     setEditingPostId(post._id);
@@ -211,19 +263,18 @@ const ManagePosts: React.FC = () => {
               </option>
             ))}
           </select>
-          <select
-            multiple
+          <ReactSelect
+            isMulti
             name="tags"
-            value={form.tags}
-            onChange={handleTagChange}
+            options={tags.map((tag) => ({ value: tag.name, label: tag.name }))}
+            value={form.tags.map((tagName) => ({
+              value: tagName,
+              label: tagName,
+            }))}
+            onChange={handleTagChange} // <== use your function here
             className="w-full border p-2 rounded"
-          >
-            {tags.map((tag) => (
-              <option key={tag._id} value={tag.name}>
-                {tag.name}
-              </option>
-            ))}
-          </select>
+          />
+
           <input
             type="file"
             name="images"
@@ -242,14 +293,20 @@ const ManagePosts: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {posts.map((post) => (
-          <div key={post._id} className="bg-white p-6 rounded-lg shadow-md space-y-2">
-            <h2 className="text-2xl font-bold">{post.title}</h2>
+          <div
+            key={post._id}
+            className="bg-white p-6 rounded-lg shadow-md space-y-2"
+          >
+            <h2 className="text-2xl font-bold text-orange-700">{post.title}</h2>
             <p className="text-gray-600">{post.content.slice(0, 100)}...</p>
-            <p className="text-sm text-gray-400">{post.category}</p>
-            <div className="flex space-x-2 mt-2">
+            <p className="text-sm text-gray-400">{post.category.name}</p>
+            <div className=" mt-2">
               {post.tags.map((tag) => (
-                <span key={tag} className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">
-                  {tag}
+                <span
+                  key={tag._id}
+                  className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded"
+                >
+                  #{tag.name}
                 </span>
               ))}
             </div>
