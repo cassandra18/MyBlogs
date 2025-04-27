@@ -48,14 +48,14 @@ const ManagePosts: React.FC = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const res = await axios.get("http://localhost:3000/api/post");
+    const res = await axios.get("https://cassys-web.onrender.com/api/post");
     const fetchedPosts = Array.isArray(res.data) ? res.data : res.data.posts;
     setPosts(fetchedPosts || []);
   };
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/categories");
+      const res = await axios.get("https://cassys-web.onrender.com/api/categories");
       setCategories(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -65,7 +65,7 @@ const ManagePosts: React.FC = () => {
 
   const fetchTags = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/tags");
+      const res = await axios.get("https://cassys-web.onrender.com/api/tags");
       setTags(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error("Error fetching tags:", error);
@@ -147,7 +147,7 @@ const ManagePosts: React.FC = () => {
       // If editing an existing post
       if (editingPostId) {
         await axios.put(
-          `http://localhost:3000/api/post/${editingPostId}`,
+          `https://cassys-web.onrender.com/api/post/${editingPostId}`,
           formData, 
           {
             headers: {
@@ -159,7 +159,7 @@ const ManagePosts: React.FC = () => {
         setEditingPostId(null);
       } else {
         // If creating a new post
-        await axios.post("http://localhost:3000/api/post/", formData, {
+        await axios.post("https://cassys-web.onrender.com/api/post/", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-type": "multipart/form-data",
@@ -213,7 +213,7 @@ const ManagePosts: React.FC = () => {
 
   // Handle post delete
   const handleDelete = async (id: string) => {
-    await axios.delete(`http://localhost:3000/api/post/${id}`);
+    await axios.delete(`https://cassys-web.onrender.com/api/post/${id}`);
     fetchPosts();
   };
 

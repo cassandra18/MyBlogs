@@ -18,7 +18,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs, currentPage, selectedCategory, pag
   )
   .slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
-  const baseUrl = "http://localhost:3000"; // Make sure to use the correct base URL for your images
+  const baseUrl = "https://cassys-web.onrender.com"; // Make sure to use the correct base URL for your images
 
   return (
     <>

@@ -12,7 +12,7 @@ const SingleBlog = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/post/${postId}`);
+        const response = await fetch(`https://cassys-web.onrender.com/api/post/${postId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch post data");
         }
@@ -43,7 +43,7 @@ const SingleBlog = () => {
     createdAt,
     authorName,
   } = postData;
-  const baseUrl = "http://localhost:3000"; 
+  const baseUrl = "https://cassys-web.onrender.com"; 
 
   return (
     <>

@@ -52,12 +52,12 @@ const router = createBrowserRouter([
       {
         path: '/post/:postId',
         element: <SingleBlog/>,
-        loader: ({params}) => fetch(`http://localhost:3000/api/post/${params.postId}`)
+        loader: ({params}) => fetch(`https://cassys-web.onrender.com/api/post/${params.postId}`)
       },
       {
         path: '/get-admin/:adminId',
         element: <SingleAuthor/>,
-        loader: ({params}) => fetch(`http://localhost:3000/api/admin/get-admin/${params.adminId}`)
+        loader: ({params}) => fetch(`https://cassys-web.onrender.com/api/admin/get-admin/${params.adminId}`)
       },
     ]
   },

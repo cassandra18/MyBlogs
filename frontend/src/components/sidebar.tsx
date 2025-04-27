@@ -8,7 +8,7 @@ const Sidebar: React.FC = () => {
 
   // Fetching posts on mount
   useEffect(() => {
-    fetch("http://localhost:3000/api/post")
+    fetch("https://cassys-web.onrender.com/api/post")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched data:", data); // Debugging to check data

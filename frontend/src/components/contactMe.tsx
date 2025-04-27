@@ -13,7 +13,7 @@ const ContactForm: React.FC = () => {
   const handleLogin = async () => {
     try {
       //use the url to fech input data from the client
-      const response = await fetch("http://localhost:3000/api/contactme", {
+      const response = await fetch("https://cassys-web.onrender.com/api/contactme", {
         method: "POST",
         headers: {
           //object representing the headers part of the HTTP request

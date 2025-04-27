@@ -16,7 +16,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `http://localhost:3000/api/post?page=${currentPage}&limit=${pageSize}`;
+        let url = `https://cassys-web.onrender.com/api/post?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${encodeURIComponent(selectedCategory)}`;
@@ -38,7 +38,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/categories"); // <-- Adjust based on your backend
+        const response = await fetch("https://cassys-web.onrender.com/api/categories"); // <-- Adjust based on your backend
         const data = await response.json();
         const categoryNames = data.map((cat: { name: string }) => cat.name);
         setCategories(categoryNames);
