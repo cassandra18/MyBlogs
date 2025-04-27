@@ -14,6 +14,7 @@ interface Tag {
   _id: string;
   name: string;
 }
+
 interface Post {
   _id: string;
   title: string;
@@ -28,20 +29,10 @@ const ManagePosts: React.FC = () => {
   const [form, setForm] = useState({
     title: "",
     content: "",
-    category: "", // Store category name, not ID
-    tags: [] as string[], // Store tags by name
+    category: { _id: "", name: "" }, // Category now stores an object with _id and name
+    tags: [] as { _id: string, name: string }[], // Store tags by name
     images: [] as File[],
   });
-
-  interface Category {
-    _id: string;
-    name: string;
-  }
-
-  interface Tag {
-    _id: string;
-    name: string;
-  }
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
@@ -65,27 +56,17 @@ const ManagePosts: React.FC = () => {
   const fetchCategories = async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/categories");
-
-      if (Array.isArray(res.data)) {
-        setCategories(res.data);
-      } else {
-        setCategories([]); // fallback to empty if it's not an array
-      }
+      setCategories(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error("Error fetching categories:", error);
-      setCategories([]); // fallback to empty on error
+      setCategories([]);
     }
   };
 
   const fetchTags = async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/tags");
-
-      if (Array.isArray(res.data)) {
-        setTags(res.data);
-      } else {
-        setTags([]);
-      }
+      setTags(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error("Error fetching tags:", error);
       setTags([]);
@@ -99,7 +80,18 @@ const ManagePosts: React.FC = () => {
     >
   ) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    if (name === "category") {
+      // Find the selected category object from the categories array
+      const selectedCategory = categories.find((cat) => cat._id === value);
+      if (selectedCategory) {
+        setForm((prev) => ({ ...prev, category: selectedCategory }));
+      } else {
+        // Handle the case where the selected value doesn't match any category (shouldn't happen in normal use)
+        setForm((prev) => ({ ...prev, category: { _id: "", name: "" } }));
+      }
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   // Handle file changes (images)
@@ -123,7 +115,10 @@ const ManagePosts: React.FC = () => {
   
     setForm((prev) => ({
       ...prev,
-      tags: newValue.map((option) => option.value),
+      tags: newValue.map((option) => {
+        const selectedTag = tags.find((tag) => tag._id === option.value);
+        return selectedTag ? { _id: selectedTag._id, name: selectedTag.name } : { _id: "", name: option.value };
+      }),
     }));
   };
   
@@ -134,27 +129,36 @@ const ManagePosts: React.FC = () => {
     const formData = new FormData();
     formData.append("title", form.title);
     formData.append("content", form.content);
-    formData.append("category", form.category); // Use category name here
+    formData.append("category", form.category._id);
     form.tags.forEach((tag) => {
-      formData.append("tags", tag); // Use tag name here
+      formData.append("tags[]", tag._id);
     });
     form.images.forEach((image) => {
       formData.append("images", image);
     });
-
+  
+    console.log("Form data being submitted:", formData);
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found. Please login again.");
       }
-
+  
+      // If editing an existing post
       if (editingPostId) {
         await axios.put(
           `http://localhost:3000/api/post/${editingPostId}`,
-          form
+          formData, 
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-type": "multipart/form-data",
+            },
+          }
         );
         setEditingPostId(null);
       } else {
+        // If creating a new post
         await axios.post("http://localhost:3000/api/post/", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -162,14 +166,14 @@ const ManagePosts: React.FC = () => {
           },
         });
       }
-      setForm({ title: "", content: "", category: "", tags: [], images: [] });
-      fetchPosts();
-      setShowForm(false);
+      // Reset form fields
+      setForm({ title: "", content: "", category: { _id: "", name: "" }, tags: [], images: [] });
+      fetchPosts(); // Refresh the posts list
+      setShowForm(false); // Hide the form
 
+      console.log("Form submitted successfully!", form);
       toast.success(
-        editingPostId
-          ? "Post updated successfully!"
-          : "Post created successfully!",
+        editingPostId ? "Post updated successfully!" : "Post created successfully!",
         {
           position: "top-right",
           autoClose: 3000,
@@ -199,8 +203,8 @@ const ManagePosts: React.FC = () => {
     setForm({
       title: post.title,
       content: post.content,
-      category: post.category.name, // Set category name directly
-      tags: post.tags.map((tag) => tag.name), // Set tags names directly
+      category: post.category, // Set the full category object (with _id and name)
+      tags: post.tags, // Set tags as an array of objects (with _id and name)
       images: [],
     });
     setEditingPostId(post._id);
@@ -251,14 +255,14 @@ const ManagePosts: React.FC = () => {
           />
           <select
             name="category"
-            value={form.category}
+            value={form.category._id}
             onChange={handleChange}
             className="w-full border p-2 rounded"
             required
           >
             <option value="">Select Category</option>
             {categories.map((cat) => (
-              <option key={cat._id} value={cat.name}>
+              <option key={cat._id} value={cat._id}>
                 {cat.name}
               </option>
             ))}
@@ -266,12 +270,12 @@ const ManagePosts: React.FC = () => {
           <ReactSelect
             isMulti
             name="tags"
-            options={tags.map((tag) => ({ value: tag.name, label: tag.name }))}
-            value={form.tags.map((tagName) => ({
-              value: tagName,
-              label: tagName,
+            options={tags.map((tag) => ({ value: tag._id, label: tag.name }))}
+            value={form.tags.map((tag) => ({
+              value: tag._id,
+              label: tag.name,
             }))}
-            onChange={handleTagChange} // <== use your function here
+            onChange={handleTagChange}
             className="w-full border p-2 rounded"
           />
 
@@ -304,7 +308,7 @@ const ManagePosts: React.FC = () => {
               {post.tags.map((tag) => (
                 <span
                   key={tag._id}
-                  className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded"
+                  className="text-xs bg-orange-100 text-orange-700 px-2  py-1 rounded mr-2"
                 >
                   #{tag.name}
                 </span>

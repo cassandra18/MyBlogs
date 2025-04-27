@@ -1,7 +1,3 @@
-const path = require('path');
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-const fs = require('fs');
 const asyncHandler = require("express-async-handler");
 
 const Post = require("../models/blogPostSchema");
@@ -41,8 +37,9 @@ const postController = {
       imagePaths,
     });
   
+     
     if (newPost) {
-      res.status(201).json(newPost);
+      res.status(201).json({ success:true, post: newPost });
     } else {
       res.status(400);
       throw new Error("Invalid data");
