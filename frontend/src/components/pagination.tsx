@@ -1,16 +1,5 @@
 import React from 'react';
-
-interface Post {
-    title: string;
-    content: string;
-    _id: number;
-    authorName: string;
-    createdAt: Date;
-    imageUrl: string;
-    comments: string;
-    ratings: number;
-    category: string; 
-  }
+import { Post } from "../types/post";
 
 interface PaginationProps {
     onPageChange: (pageNumber: number) => void;

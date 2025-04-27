@@ -57,14 +57,14 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div
-      className="py-20 w-full bg-gradient-to-br from-orange-100 to-white"
+      className="py-20 w-full"
       
     >
       <h1 className="py-10 px-10 text-orange-500 text-center">Create Account</h1>
       {errorMessage && <div className="error-message text-center text-red-500 mb-4">{errorMessage}</div>}
       
       <form
-        className="bg-gray-50 shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4"
+        className=" bg-gradient-to-br to-orange-100 from-gray-50 shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4"
 
       >
         <div>

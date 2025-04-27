@@ -3,201 +3,109 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
-
 const Footer: React.FC = () => {
-  const [email, setEmail] = useState(""); // staore the email input
+  const [email, setEmail] = useState("");
 
   const handleSubscription = async () => {
     try {
-      //Send a post request to the backend API endpoint
-      const response = await fetch("https://cassys-web.onrender.com/api/subcribe", {
+      const response = await fetch("http://localhost:3000/api/subcribe", {
         method: "POST",
-        "headers": {
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
-      //If the request is successful, display a success message to the user
       if (response.ok) {
-        toast.success("Subscription successful!",{
-          position: "top-center", // Adjust position as needed
-          autoClose: 5000, // Close after 5 seconds
+        toast.success("Subscription successful!", {
+          position: "top-center",
+          autoClose: 5000,
         });
-
         setEmail("");
-      
       } else {
         toast.error("Error subscribing. Please try again later.", {
-          position: "top-center", // Adjust position as needed
-          autoClose: 5000, // Close after 5 seconds
+          position: "top-center",
+          autoClose: 5000,
         });
       }
     } catch (error) {
       console.error(error);
       toast.error("Error subscribing. Please try again later.", {
-        position: "top-center", // Adjust position as needed
-        autoClose: 5000, // Close after 5 seconds
+        position: "top-center",
+        autoClose: 5000,
       });
     }
-    
-  }
+  };
+
   return (
-    <div className="bg-black bottom-0 left-0 right-0" style={{  backgroundColor: 'rgba(0, 0, 0, 0.1)',opacity: 0.9 }}>
-      <div className="px-4 pt-16 mx-auto  sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
-        <div className="grid lg:grid-cols-6 mb-0">
-          <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4 ">
+    <div className="bg-black relative w-full" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', opacity: 0.9 }}>
+      <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-4">
+        <div className="grid lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 gap-5 lg:col-span-4 md:grid-cols-4">
+            {/* Links sections */}
             <div>
-              <p className="font-medium tracking-wide ">I am</p>
+              <p className="font-medium tracking-wide">I am</p>
               <ul className="mt-2 space-y-2">
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Happy
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Loved
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Content
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Able
-                  </Link>
-                </li>
+                {["Happy", "Loved", "Content", "Able"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      to="/about"
+                      className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <p className="font-medium tracking-wide ">Fashion</p>
+              <p className="font-medium tracking-wide">Fashion</p>
               <ul className="mt-2 space-y-2">
-                <li>
-                  <Link
-                    to="/blogs"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    News
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/blogs"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Aesthetics
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/blogs"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Inspo
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/blogs"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    DIY
-                  </Link>
-                </li>
+                {["News", "Aesthetics", "Inspo", "DIY"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      to="/blogs"
+                      className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <p className="font-medium tracking-wide ">
-                Mental Health
-              </p>
+              <p className="font-medium tracking-wide">Mental Health</p>
               <ul className="mt-2 space-y-2">
-                <li>
-                  <Link
-                    to="/blogs"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Journals
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Mood
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Games
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                    Happiness
-                  </Link>
-                </li>
+                {["Journals", "Mood", "Games", "Happiness"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      to="/blogs"
+                      className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <p className="font-medium tracking-wide ">Contact</p>
+              <p className="font-medium tracking-wide">Contact</p>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <Link
-                    to="https://www.linkedin.com/in/cassandra-lelei-88987a269"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
+                  <Link to="https://www.linkedin.com/in/cassandra-lelei-88987a269" className="text-gray-500 hover:text-orange-500">
                     <FaLinkedin />
                   </Link>
                 </li>
-
                 <li>
-                  <Link
-                    to="https://github.com/cassandra18"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
-                     <FaGithub />
+                  <Link to="https://github.com/cassandra18" className="text-gray-500 hover:text-orange-500">
+                    <FaGithub />
                   </Link>
                 </li>
-
                 <li>
-                  <Link
-                    to="https://x.com/LelCassandra?t=3buzTiV9hqiVe1T4fJNdZw&s=09"
-                    className="text-gray-500 transition-colors duration-300 hover:text-orange-500"
-                  >
+                  <Link to="https://x.com/LelCassandra?t=3buzTiV9hqiVe1T4fJNdZw&s=09" className="text-gray-500 hover:text-orange-500">
                     <FaTwitter />
                   </Link>
                 </li>
@@ -205,33 +113,32 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="md:max-w-md lg:col-span-2 lg:mt-0 mt-5">
-            <p className="font-medium tracking-wide text-whiteh-full">Subscription</p>
-            <form className="mt-4 flex flex-col md:flex-row"
-            onSubmit={ (e) => {
-              e.preventDefault();
-              handleSubscription();
-            }}>
-              <div className="flex py-2 space-x-2">
-                <label className="text-gray-500 " >Email:
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  autoComplete="email"
-                  className="w-full h-8 px-4 rounded  focus:outline-none border "
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
-                />
-                </label>
-                <button
-                  type="submit"
-                  className="inline-flex px-4 items-center rounded border text-gray-500 bg-gray-700
-                                justify-center font-medium tracking-wide transition duration-200 shadow-md hover:bg-orange-200 focus:outline-none "
-                >
-                  Subscribe
-                </button>
-              </div>
+          {/* Subscription section */}
+          <div className="md:max-w-md lg:col-span-2">
+            <p className="font-medium tracking-wide text-gray-900 text-center">Subscription</p>
+            <form
+              className="mt-4 flex flex-col sm:flex-row items-center gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubscription();
+              }}
+            >
+              <input
+                type="email"
+                name="email"
+                id="email"
+                autoComplete="email"
+                placeholder="Enter your email"
+                className="flex-1 py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 bg-transparent text-gray-700 placeholder:text-gray-400"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="h-10 px-6 rounded-full bg-orange-400 text-white font-semibold hover:bg-orange-500 transition-all duration-300"
+              >
+                Subscribe
+              </button>
             </form>
           </div>
         </div>

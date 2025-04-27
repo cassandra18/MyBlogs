@@ -16,7 +16,7 @@ const ContactForm: React.FC = () => {
     try {
       //use the url to fech input data from the client
       const response = await fetch(
-        "https://cassys-web.onrender.com/api/contactme",
+        "http://localhost:3000/api/contactme",
         {
           method: "POST",
           headers: {
@@ -71,10 +71,10 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="py-20 w-full  " style={{ backgroundImage: "linear-gradient(to bottom right, rgba(188, 220, 209, 0.7), rgba(137, 167, 167, 0.7), rgba(205, 229, 220, 0.7))" }}>
-      <h1 className="py-10 px-10 text-white text-center ">Contact me. Lets engage!</h1>
+    <div className="py-20 w-full  ">
+      <h1 className="py-10 px-10 text-orange-500 text-center ">Contact me. Lets engage!</h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <form className="shadow-md max-w-xl mx-auto rounded px-8 pt-6 pb-8 mb-4">
+      <form className="shadow-md max-w-xl mx-auto rounded-2xl px-8 pt-6 pb-8 mb-4 bg-gradient-to-br from-gray-100 to-orange-100">
         <div>
           <label className="block text-black text-l mb-2" htmlFor="name">
             Name

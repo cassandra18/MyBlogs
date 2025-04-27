@@ -15,7 +15,7 @@ const SingleAuthor: React.FC = () => {
     useEffect(() => {
         const fetchAuthorDeails = async () => {
         try {
-            const response = await fetch(`https://cassys-web.onrender.com/api/admin/get-admin/${adminId}`);
+            const response = await fetch(`http://localhost:3000/api/admin/get-admin/${adminId}`);
             const data :Admin= await response.json()
             setAdmin(data);
         

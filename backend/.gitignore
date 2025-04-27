@@ -4,7 +4,7 @@ node_modules/
 {
   
  "title":"Nails",
- "imageUrl": "https://i.pinimg.com/564x/e0/6b/ca/e06bca36ed7acc694b2e33782d7dc287.jpg",
+ "images": "https://i.pinimg.com/564x/e0/6b/ca/e06bca36ed7acc694b2e33782d7dc287.jpg",
  "content": "testing",
  "authorName": "Cassandra",
  "category": "Nails",

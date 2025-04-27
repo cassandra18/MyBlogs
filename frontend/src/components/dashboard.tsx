@@ -3,17 +3,7 @@ import Blogs from "./Blogs";
 import Pagination from "./pagination";
 import Categories from "./categories";
 import Sidebar from "./sidebar";
-interface Post {
-  title: string;
-  content: string;
-  _id: number;
-  authorName: string;
-  createdAt: Date;
-  imageUrl: string;
-  comments: string;
-  ratings: number;
-  category: string;
-}
+import { Post } from "../types/post";
 
 const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +17,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `https://cassys-web.onrender.com/api/post/post-by-author?page=${currentPage}&limit=${pageSize}`;
+        let url = `http://localhost:3000/api/post/post-by-author?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;

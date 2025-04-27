@@ -29,8 +29,8 @@ const Header: React.FC = () => {
     >
       <nav className="px-2 text-white font-bold py-2 mx-auto flex justify-between items-center" style={{ backdropFilter: "blur(10px)", background: "rgba(0, 0, 0, 0.3)" }}>
         <h1>
-          <Link to="/" className="text-xl font-bold">
-            Cassy's <span className="text-orange-500">Web</span>
+          <Link to="/" className="text-xl font-bold text-black">
+            Cassy's <span className="text-orange-600">Web</span>
           </Link>
         </h1>
 

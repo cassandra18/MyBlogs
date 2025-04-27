@@ -12,7 +12,7 @@ const SingleBlog = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await fetch(`https://cassys-web.onrender.com/api/post/${postId}`);
+        const response = await fetch(`http://localhost:3000/api/post/${postId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch post data");
         }
@@ -39,22 +39,17 @@ const SingleBlog = () => {
   const {
     title,
     content,
-    imageUrl,
+    imagePaths,
     createdAt,
     authorName,
   } = postData;
-
+  const baseUrl = "http://localhost:3000"; 
 
   return (
     <>
       <div className="max-w-7xl mx-auto mt-24 flex px-2 flex-col md:flex-row gap-12">
         <div className="lg:w-1/2 mx-auto">
           <div>
-            <img
-              src={imageUrl}
-              alt=""
-              className="w-full mx-auto max-h-96 rounded object-cover object-center"
-            ></img>
             <h2 className="text-3xl text-orange-800 font-bold mt-8 mb-4 ">
               {title}
             </h2>
@@ -67,12 +62,19 @@ const SingleBlog = () => {
                 day: "numeric",
               })} 
             </p>
+            <img
+              src={`${baseUrl}/${imagePaths[0]}`} // Full URL for the image
+              alt={title}
+              className="w-full mx-auto max-h-96 rounded object-cover object-center"
+            ></img>
+            
+            
 
             <p className="text-base text-gray-800 mb-6">{content}</p>
           </div>
         </div>
 
-        <div className="lg:w-1/2">
+        <div className="lg:w-1/4">
             <Sidebar/>
         </div>
       </div>

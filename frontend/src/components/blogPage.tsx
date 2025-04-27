@@ -3,22 +3,11 @@ import Blogs from "./Blogs";
 import Pagination from "./pagination";
 import Categories from "./categories";
 import Sidebar from "./sidebar";
-
-interface Post {
-  title: string;
-  content: string;
-  _id: number;
-  authorName: string;
-  createdAt: Date;
-  imageUrl: string;
-  comments: string;
-  ratings: number;
-  category: string;
-}
+import { Post } from "../types/post";
 
 const BlogPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12; //  Blogs per page
+  const pageSize = 12; // Blogs per page
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[] | null>([]); // posts is an array of objects
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -27,7 +16,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `https://cassys-web.onrender.com/api/post/get-all-posts?page=${currentPage}&limit=${pageSize}`;
+        let url = `http://localhost:3000/api/post/?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
@@ -35,9 +24,11 @@ const BlogPage: React.FC = () => {
 
         const response = await fetch(url);
         const data = await response.json();
+        console.log("API Response Data:", data); 
         setPosts(data); // Set the fetched data as posts
       } catch (error) {
         console.error("Error fetching posts:", error);
+        setPosts([]);
       }
     };
 
