@@ -7,25 +7,25 @@ import { Post } from "../types/post";
 
 const BlogPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12; // Blogs per page
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [posts, setPosts] = useState<Post[] | null>([]); // posts is an array of objects
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const pageSize = 12;
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>("");
+  const [categories, setCategories] = useState<string[]>([]); // <-- New!
 
-  // useEffect is used to connect a component to an external system.
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        let url = `http://localhost:3000/api/post/?page=${currentPage}&limit=${pageSize}`;
+        let url = `http://localhost:3000/api/post?page=${currentPage}&limit=${pageSize}`;
 
         if (selectedCategory) {
-          url += `&category=${selectedCategory}`;
+          url += `&category=${encodeURIComponent(selectedCategory)}`;
         }
 
         const response = await fetch(url);
         const data = await response.json();
-        console.log("API Response Data:", data); 
-        setPosts(data); // Set the fetched data as posts
+        console.log("API Response Data:", data);
+        setPosts(data.posts || []);
       } catch (error) {
         console.error("Error fetching posts:", error);
         setPosts([]);
@@ -35,7 +35,22 @@ const BlogPage: React.FC = () => {
     fetchPosts();
   }, [currentPage, pageSize, selectedCategory]);
 
-  // Function to handle category change
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/categories"); // <-- Adjust based on your backend
+        const data = await response.json();
+        const categoryNames = data.map((cat: { name: string }) => cat.name);
+        setCategories(categoryNames);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategories([]);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -44,29 +59,30 @@ const BlogPage: React.FC = () => {
 
   return (
     <div>
-      {/* Category section */}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Categories filter */}
         <Categories
           onSelectCategory={handleCategoryChange}
           selectedCategory={selectedCategory}
           activeCategory={activeCategory}
+          categories={categories} // <-- Pass dynamic categories
         />
 
-        {/* All blogs container */}
-        <div className="flex flex-col md:flex-row lg:gap-12 md:gap-6 gap-6">
-          {/* Blogs section */}
-          <Blogs
-            blogs={posts}
-            currentPage={currentPage}
-            selectedCategory={selectedCategory} // Pass selectedCategory to Blogs
-            pageSize={pageSize}
-          />
-
-          {/* Sidebar component */}
-          <Sidebar />
+        {/* Main Content */}
+        <div className="flex flex-col md:flex-row md:gap-6 lg:gap-12 mt-8">
+          <div className="flex-1">
+            <Blogs
+              blogs={posts}
+              currentPage={currentPage}
+              selectedCategory={selectedCategory}
+              pageSize={pageSize}
+            />
+          </div>
+          <div className=" sm:w-1/5 lg:w-1/6">
+            <Sidebar />
+          </div>
         </div>
 
-        {/* Pagination */}
         <Pagination
           onPageChange={setCurrentPage}
           currentPage={currentPage}

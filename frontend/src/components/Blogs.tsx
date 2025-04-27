@@ -12,8 +12,11 @@ interface BlogsProps {
 
 const Blogs: React.FC<BlogsProps> = ({ blogs, currentPage, selectedCategory, pageSize }) => {
   const filteredPosts = (blogs ?? [])
-    .filter((post) => !selectedCategory || post.category === selectedCategory)
-    .slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  .filter((post) => 
+    !selectedCategory || 
+    post.category?.name === selectedCategory  // Compare category.name with selectedCategory
+  )
+  .slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   const baseUrl = "http://localhost:3000"; // Make sure to use the correct base URL for your images
 
@@ -21,7 +24,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs, currentPage, selectedCategory, pag
     <>
       {/* Blog Card section */}
       <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
-        {filteredPosts && filteredPosts.length > 0 ? (
+        {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link
               to={`/post/${post._id}`}
@@ -59,7 +62,9 @@ const Blogs: React.FC<BlogsProps> = ({ blogs, currentPage, selectedCategory, pag
             </Link>
           ))
         ) : (
-          <h1 className="text-orange-700">No blogs Yet</h1>
+          <div className="col-span-full text-center py-8 text-orange-100">
+            <h1>No blogs yet</h1>
+          </div>
         )}
       </div>
     </>

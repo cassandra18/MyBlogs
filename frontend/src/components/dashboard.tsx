@@ -7,13 +7,31 @@ import { Post } from "../types/post";
 
 const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12; //  Blogs per page
+  const pageSize = 12; // Blogs per page
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[] | null>([]); // posts is an array of objects
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [categories, setCategories] = useState<string[]>([]); // New state for categories
   const [token, setToken] = useState(""); // State to hold the JWT token
 
-  //useEffect is used to connect a component to an external system. For this case, it connects us to a browser API
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/categories"); // Adjust based on your backend
+        const data = await response.json();
+        const categoryNames = data.map((cat: { name: string }) => cat.name);
+        setCategories(categoryNames);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategories([]); // Set categories to an empty array if there's an error
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Fetch posts by category and page
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -25,14 +43,14 @@ const Dashboard: React.FC = () => {
 
         const token = localStorage.getItem('token');
         const response = await fetch(url, {
-         headers: { 'Authorization': `Bearer ${token}` },
+          headers: { 'Authorization': `Bearer ${token}` },
         });
 
         if (!response.ok) throw new Error('Failed to fetch blogs');
 
         const data = await response.json();
         console.log(data);
-        setPosts(data); // the state of the blog post changes froman empty array to the fetched data
+        setPosts(data); // Set the fetched posts
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -41,23 +59,24 @@ const Dashboard: React.FC = () => {
     fetchPosts();
   }, [token, currentPage, pageSize, selectedCategory]);
 
+  // Retrieve the JWT token from localStorage
   const retrieveToken = () => {
-      const storedToken = localStorage.getItem('token'); // Assuming token is stored in local storage
-       if (storedToken) {
-        setToken(storedToken);
-       }
-     };
+    const storedToken = localStorage.getItem('token'); // Assuming token is stored in local storage
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  };
 
-     useEffect(() => {
-     retrieveToken(); // Call retrieveToken function on component mount
-     }, []);
+  useEffect(() => {
+    retrieveToken(); // Call retrieveToken function on component mount
+  }, []);
 
-  //page changing button
+  // Handle page change
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
-  //category changing btn
+  // Handle category change
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
@@ -66,21 +85,20 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-
-      {/* category section */}
+      {/* Category section */}
       <div className="max-w-3/4">
         <div>
           <Categories
             onSelectCategory={handleCategoryChange}
             selectedCategory={selectedCategory}
             activeCategory={activeCategory}
+            categories={categories} // Pass the categories prop
           />
         </div>
 
         {/* All blogs container */}
         <div className="flex flex-col md:flex-row gap-2">
-          {/*Blogs section */}
-
+          {/* Blogs section */}
           <Blogs
             blogs={posts}
             currentPage={currentPage}
@@ -88,13 +106,13 @@ const Dashboard: React.FC = () => {
             pageSize={pageSize}
           />
 
-          {/*sidebar component */}
+          {/* Sidebar component */}
           <div>
             <Sidebar />
           </div>
         </div>
 
-        {/*pagination */}
+        {/* Pagination */}
         <div>
           <Pagination
             onPageChange={handlePageChange}

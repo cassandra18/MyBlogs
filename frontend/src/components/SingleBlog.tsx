@@ -65,12 +65,12 @@ const SingleBlog = () => {
             <img
               src={`${baseUrl}/${imagePaths[0]}`} // Full URL for the image
               alt={title}
-              className="w-full mx-auto max-h-96 rounded object-cover object-center"
+              className="w-full mt-10 mx-auto max-h-96 rounded object-cover object-center"
             ></img>
             
             
 
-            <p className="text-base text-gray-800 mb-6">{content}</p>
+            <p className="text-base text-gray-800 mb-6 font-serif mt-7">{content}</p>
           </div>
         </div>
 

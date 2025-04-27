@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],  // Default sans-serif font
+        serif: ['Merriweather', 'serif'],  // Add Merriweather for serif fonts
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/nesting')

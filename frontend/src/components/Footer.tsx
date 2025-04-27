@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
   const handleSubscription = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/subcribe", {
+      const response = await fetch("http://localhost:3000/api/email/subcribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
 
           {/* Subscription section */}
           <div className="md:max-w-md lg:col-span-2">
-            <p className="font-medium tracking-wide text-gray-900 text-center">Subscription</p>
+            <p className="font-medium tracking-wide text-gray-900 text-center">Subscribe to my emails</p>
             <form
               className="mt-4 flex flex-col sm:flex-row items-center gap-2"
               onSubmit={(e) => {

@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const Category = require("../models/categorySchema");
 
 const Post = require("../models/blogPostSchema");
 const { response } = require('express');
@@ -48,10 +49,17 @@ const postController = {
   
   // Get all posts
   getPosts: asyncHandler(async (req, res) => {
-    const posts = await Post.find().sort({ createdAt: -1 }).populate('category', 'name').populate('tags', 'name').populate('authorId', 'username');
+    const { category } = req.query;
+
+    const query = {};
+    if (category) {
+      query['category'] = { $in: await Category.find({ name: category }).distinct('_id') };
+    }
+
+    const posts = await Post.find(query).sort({ createdAt: -1 }).populate('category', 'name').populate('tags', 'name').populate('authorId', 'username');
 
     if (posts) {
-      res.status(200).json(posts);
+      res.status(200).json({ posts });
     } else {
       res.status(500);
       throw new Error('Internal server error');

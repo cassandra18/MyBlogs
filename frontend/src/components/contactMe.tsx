@@ -6,46 +6,43 @@ const ContactForm: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] =  useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false); // New state for submission status
-
-
 
   //initiate the login process when the user clicks the submit button.
   const handleLogin = async () => {
     try {
       //use the url to fech input data from the client
-      const response = await fetch(
-        "http://localhost:3000/api/contactme",
-        {
-          method: "POST",
-          headers: {
-            //object representing the headers part of the HTTP request
-            "content-type": "application/json", // type of content being sent to the server is in JSON format
-          },
-          body: JSON.stringify({
-            //convert JS objects into JSON string.
-            name,
-            email,
-            message,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:3000/api/contactme", {
+        method: "POST",
+        headers: {
+          //object representing the headers part of the HTTP request
+          "content-type": "application/json", // type of content being sent to the server is in JSON format
+        },
+        body: JSON.stringify({
+          //convert JS objects into JSON string.
+          name,
+          email,
+          message,
+        }),
+      });
 
       if (!response.ok) {
-        const errorMessage = await response.text();
-        setErrorMessage(`Error: ${response.status} - ${errorMessage}`);
+        toast.error("Error contacting Cassy's Blogs. Please try again later.", {
+          position: "top-center",
+          autoClose: 5000,
+        });
         return;
       }
       //If the response is susccessful the form is submitted sucessfully
       const data = await response.json();
 
-      if (isSubmitted){
+      if (isSubmitted) {
         console.log("Form submitted successfully:", data);
 
         setIsSubmitted(true);
       }
-      
+
       toast.success("Form submitted successfully!", {
         position: "top-right", // Adjust position as needed
         autoClose: 5000, // Close after 5 seconds
@@ -54,7 +51,6 @@ const ContactForm: React.FC = () => {
       setName("");
       setEmail("");
       setMessage("");
-    
     } catch (error) {
       //Handle errors that might occur during non-successful response
 
@@ -71,10 +67,12 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="py-20 w-full  ">
-      <h1 className="py-10 px-10 text-orange-500 text-center ">Contact me. Lets engage!</h1>
+    <div className="py-20 w-full">
+      <h1 className="py-10 md:px-10 text-orange-500 text-center ">
+        Contact me. Lets engage!
+      </h1>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <form className="shadow-md max-w-xl mx-auto rounded-2xl px-8 pt-6 pb-8 mb-4 bg-gradient-to-br from-gray-100 to-orange-100">
+      <form className="shadow-md max-w-xl md:mx-auto rounded-2xl mx-2 px-8 pt-6 pb-8 mb-4 bg-gradient-to-br from-gray-100 to-orange-100">
         <div>
           <label className="block text-black text-l mb-2" htmlFor="name">
             Name
@@ -87,7 +85,10 @@ const ContactForm: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
-            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
+            style={{
+              backgroundColor: "rgba(188, 220, 209, 0.1)",
+              outline: "none !important",
+            }}
           />
         </div>
         <br />
@@ -103,7 +104,10 @@ const ContactForm: React.FC = () => {
             value={email}
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
-            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
+            style={{
+              backgroundColor: "rgba(188, 220, 209, 0.1)",
+              outline: "none !important",
+            }}
           />
         </div>
         <br />
@@ -119,7 +123,10 @@ const ContactForm: React.FC = () => {
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
             cols={50}
-            style={{ backgroundColor: 'rgba(188, 220, 209, 0.1)', outline: 'none !important' }} 
+            style={{
+              backgroundColor: "rgba(188, 220, 209, 0.1)",
+              outline: "none !important",
+            }}
           />
         </div>
         <br />
@@ -130,7 +137,6 @@ const ContactForm: React.FC = () => {
         >
           Submit
         </button>
-        
       </form>
     </div>
   );

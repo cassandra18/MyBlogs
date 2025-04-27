@@ -7,5 +7,8 @@ export interface Post {
     imagePaths: string[];
     comments: string;
     ratings: number;
-    category: string;
+    category: {
+      id: string;   // ID of the category
+      name: string; // Name of the category
+    };
   }

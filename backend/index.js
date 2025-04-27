@@ -38,7 +38,7 @@ app.use('/api/user', require('./routes/userRoutes'));
 app.use('/api/email', require('./routes/emailRoutes'));
 
 // Contact form route
-app.use('/api/contact', require('./routes/contactRoutes'));
+app.use('/api/', require('./routes/contactRoutes'));
 
 app.use('/uploads', express.static('uploads'));
 
